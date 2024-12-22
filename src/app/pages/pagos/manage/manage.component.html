@@ -1,0 +1,81 @@
+<div class="container mx-auto px-4 py-6">
+    <!-- Título -->
+    <h1 class="text-2xl font-bold mb-4">Gestión de Pago</h1>
+  
+    <!-- Información del Cliente -->
+    <div class="mb-4">
+      <div class="flex items-center">
+        <span class="text-lg font-semibold mr-2">Cliente:</span>
+        <span>{{ name || 'Cargando...' }}</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-lg font-semibold mr-2">Correo electrónico:</span>
+        <span>{{ email_client || 'Cargando...' }}</span>
+      </div>
+      <div class="flex items-center mt-2">
+        <span class="text-lg font-semibold mr-2">Rol:</span>
+        <span>{{ role || 'Cargando...' }}</span>
+      </div>
+    </div>
+  
+    <!-- Botones de acción -->
+    <div class="mb-6">
+      <button
+        (click)="pay()"
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
+      >
+        Iniciar Pago
+      </button>
+    </div>
+  
+    <!-- Sección de Información sobre el pago -->
+    <div class="mb-4">
+      <h2 class="text-xl font-semibold">Información del Pago</h2>
+      <div class="mt-2">
+        <button
+          (click)="toggleInfo('price')"
+          class="bg-gray-200 px-3 py-2 rounded hover:bg-gray-300 focus:outline-none"
+        >
+          Información sobre el precio
+        </button>
+        <button
+          (click)="toggleInfo('duration')"
+          class="bg-gray-200 px-3 py-2 rounded hover:bg-gray-300 focus:outline-none ml-2"
+        >
+          Duración
+        </button>
+        <button
+          (click)="toggleInfo('tipo')"
+          class="bg-gray-200 px-3 py-2 rounded hover:bg-gray-300 focus:outline-none ml-2"
+        >
+          Tipo de pago
+        </button>
+      </div>
+  
+      <!-- Descripción del precio -->
+      <div *ngIf="isPriceInfoOpen" class="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+        <p class="text-sm">Este es un pago para recargar tu saldo. El monto es de 50,000 COP.</p>
+      </div>
+  
+      <!-- Duración -->
+      <div *ngIf="isDurationInfoOpen" class="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+        <p class="text-sm">Este pago te permitirá continuar apostando durante 30 días.</p>
+      </div>
+  
+      <!-- Tipo de Pago -->
+      <div *ngIf="isTypeInfoOpen" class="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+        <p class="text-sm">El tipo de pago es a través de ePayco.</p>
+      </div>
+    </div>
+  
+    <!-- Mensaje de acceso denegado -->
+    <div *ngIf="!cliente_id" class="bg-red-500 text-white p-4 rounded mb-4">
+      <p>Por favor, inicia sesión para acceder a esta funcionalidad.</p>
+    </div>
+  
+    <!-- Spinner de carga -->
+    <div *ngIf="!cliente_id" class="flex justify-center items-center mt-8">
+      <div class="w-16 h-16 border-4 border-t-4 border-blue-500 rounded-full animate-spin"></div>
+    </div>
+  </div>
+  

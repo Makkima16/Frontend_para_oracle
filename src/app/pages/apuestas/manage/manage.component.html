@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-3xl mx-auto bg-gray-50 p-8 shadow-lg rounded-lg">
+  <h2 class="text-3xl font-bold mb-6 text-gray-900">Registrar Apuesta</h2>
+
+  <div class="form-group">
+    <label for="p_tipo_apuesta">Tipo de Apuesta</label>
+    <select id="p_tipo_apuesta" formControlName="p_tipo_apuesta" class="form-control" (change)="onTipoApuestaChange()">
+      <option value="">Seleccione un tipo de apuesta</option>
+      <option *ngFor="let tipo of tipoApuestaOptions" [value]="tipo">{{ tipo }}</option>
+    </select>
+  </div>
+  
+  <!-- Marcador Exacto: Gol Equipo 1 y Gol Equipo 2 -->
+  <div class="form-group" *ngIf="form.get('p_tipo_apuesta')?.value === 'Marcador Exacto'">
+    <label for="p_goles_equipo1">Marcador {{ equipo1?.nombre }}</label>
+    <input type="number" id="p_goles_equipo1" formControlName="p_goles_equipo1" class="form-control" />
+  </div>
+  
+  <div class="form-group" *ngIf="form.get('p_tipo_apuesta')?.value === 'Marcador Exacto'">
+    <label for="p_goles_equipo2">Marcador {{ equipo2?.nombre }}</label>
+    <input type="number" id="p_goles_equipo2" formControlName="p_goles_equipo2" class="form-control" />
+  </div>
+  
+  <!-- Ganador del Partido: Selección de equipo -->
+  <div class="form-group" *ngIf="form.get('p_tipo_apuesta')?.value === 'Ganador del Partido'">
+    <label for="p_equipo_ganador">Equipo Ganador</label>
+    <select id="p_equipo_ganador" formControlName="p_equipo_ganador" class="form-control">
+      <option value="">Seleccione el equipo ganador</option>
+      <option *ngFor="let equipo of equiposDelPartido" [value]="equipo.id">{{ equipo.nombre }}</option>
+    </select>
+  </div>
+  
+  <!-- Monto -->
+  <div class="form-group">
+      <label for="p_monto">Monto de la Apuesta</label>
+      <input type="number" id="p_monto" formControlName="p_monto" class="form-control" [max]="saldo_cliente" />
+      <small class="form-text text-muted">El monto no puede exceder el saldo disponible ({{ saldo_cliente }}).</small>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid" class="w-full bg-green-500 text-white py-3 rounded-lg shadow-md hover:bg-green-600">
+    Registrar Apuesta
+  </button>
+</form>

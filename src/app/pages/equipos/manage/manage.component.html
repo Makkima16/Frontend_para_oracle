@@ -1,0 +1,78 @@
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Crear Nuevo Equipo</h2>
+    
+    <form [formGroup]="equipoForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Nombre -->
+      <div class="mb-4">
+        <label for="nombre" class="block text-gray-700 font-medium">Nombre</label>
+        <input 
+          id="nombre" 
+          formControlName="nombre" 
+          type="text" 
+          class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          placeholder="Ingrese el nombre del equipo" 
+        />
+        <div *ngIf="equipoForm.get('nombre')?.invalid && equipoForm.get('nombre')?.touched" class="text-sm text-red-500 mt-1">
+          El nombre es obligatorio.
+        </div>
+      </div>
+  
+      <!-- Favor -->
+      <div class="mb-4">
+        <label for="favor" class="block text-gray-700 font-medium">Favor</label>
+        <input 
+          id="favor" 
+          formControlName="favor" 
+          type="number" 
+          class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          placeholder="Número de goles a favor" 
+        />
+        <div *ngIf="equipoForm.get('favor')?.invalid && equipoForm.get('favor')?.touched" class="text-sm text-red-500 mt-1">
+          Favor debe ser un número positivo.
+        </div>
+      </div>
+  
+      <!-- Contra -->
+      <div class="mb-4">
+        <label for="contra" class="block text-gray-700 font-medium">Contra</label>
+        <input 
+          id="contra" 
+          formControlName="contra" 
+          type="number" 
+          class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          placeholder="Número de goles en contra" 
+        />
+        <div *ngIf="equipoForm.get('contra')?.invalid && equipoForm.get('contra')?.touched" class="text-sm text-red-500 mt-1">
+          Contra debe ser un número positivo.
+        </div>
+      </div>
+  
+      <!-- Número de partidos -->
+      <div class="mb-6">
+        <label for="npartidos" class="block text-gray-700 font-medium">Número de Partidos</label>
+        <input 
+          id="npartidos" 
+          formControlName="npartidos" 
+          type="number" 
+          class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          placeholder="Número total de partidos jugados"
+        />
+        <div *ngIf="equipoForm.get('npartidos')?.invalid && equipoForm.get('npartidos')?.touched" class="text-sm text-red-500 mt-1">
+          El número de partidos debe ser un número positivo.
+        </div>
+      </div>
+  
+      <!-- Botón de envío -->
+      <div class="flex justify-center">
+        <button 
+          type="submit" 
+          [disabled]="equipoForm.invalid" 
+          class="w-full py-2 px-6 bg-indigo-600 text-white rounded-lg font-semibold focus:outline-none hover:bg-indigo-700 disabled:bg-gray-400"
+        >
+          Crear Equipo
+        </button>
+      </div>
+    </form>
+  </div>
+  
